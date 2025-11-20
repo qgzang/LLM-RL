@@ -1,0 +1,25 @@
+import React from 'react';
+
+export const Variable: React.FC<{ name: string; sub?: string; color?: string }> = ({ name, sub, color = 'text-white' }) => (
+  <span className={`font-serif italic ${color}`}>
+    {name}
+    {sub && <sub className="not-italic text-[0.7em] ml-0.5">{sub}</sub>}
+  </span>
+);
+
+export const SigmoidFunc: React.FC = () => (
+  <span className="font-mono text-sm text-indigo-300">σ</span>
+);
+
+export const LogProb: React.FC<{ model: 'policy' | 'ref'; output: 'w' | 'l' }> = ({ model, output }) => {
+  const modelColor = model === 'policy' ? 'text-blue-400' : 'text-gray-400';
+  const outputColor = output === 'w' ? 'text-green-400' : 'text-red-400';
+  const modelSymbol = model === 'policy' ? 'θ' : 'ref';
+  
+  return (
+    <span>
+      log <Variable name="π" sub={modelSymbol} color={modelColor} />
+      (<Variable name="y" sub={output} color={outputColor} /> | <Variable name="x" />)
+    </span>
+  );
+};

@@ -1,0 +1,5 @@
+{
+  "name": "DPO Vis: LLM Training Explorer",
+  "description": "A robust, interactive visualization of the Direct Preference Optimization (DPO) algorithm used in LLM alignment, featuring real-time Gemini-generated training samples and step-by-step mathematical breakdowns.",
+  "requestFramePermissions": []
+}
