@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TrainingStep, DPOExample, SimulationState, CalculationResult } from '../types';
 import { Variable, LogProb } from './MathUtils';
-import { ArrowRight, Brain, Scale, CheckCircle2, XCircle, TrendingDown } from 'lucide-react';
+import { ArrowRight, Brain, CheckCircle2, XCircle, TrendingDown } from 'lucide-react';
 import { STEPS_ORDER } from '../constants';
 
-interface VisualizerProps {
+interface DpoVisualizerProps {
   example: DPOExample;
   simState: SimulationState;
   results: CalculationResult;
@@ -44,7 +44,7 @@ const ResponseCard: React.FC<{ type: 'chosen' | 'rejected'; text: string; active
   );
 };
 
-export const Visualizer: React.FC<VisualizerProps> = ({ example, simState, results }) => {
+export const DpoVisualizer: React.FC<DpoVisualizerProps> = ({ example, simState, results }) => {
   const stepIndex = STEPS_ORDER.indexOf(simState.step);
 
   const isRefActive = stepIndex >= STEPS_ORDER.indexOf(TrainingStep.FORWARD_REF);
