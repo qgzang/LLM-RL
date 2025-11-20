@@ -56,6 +56,46 @@ export const CISPO_STEPS_ORDER = [
 export const DEFAULT_BETA = 0.1;
 export const DEFAULT_LR = 1e-5;
 
+// Paper Citations
+export const ALGORITHM_PAPERS = {
+  PPO: {
+    title: "Proximal Policy Optimization Algorithms",
+    authors: "Schulman et al. (OpenAI)",
+    year: "2017",
+    link: "https://arxiv.org/abs/1707.06347"
+  },
+  DPO: {
+    title: "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+    authors: "Rafailov et al. (Stanford)",
+    year: "2023",
+    link: "https://arxiv.org/abs/2305.18290"
+  },
+  GRPO: {
+    title: "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models",
+    authors: "Shao et al. (DeepSeek)",
+    year: "2024",
+    link: "https://arxiv.org/abs/2402.03300"
+  },
+  GSPO: {
+    title: "Group Sequence Policy Optimization",
+    authors: "Xu et al.",
+    year: "2024",
+    link: "https://arxiv.org/search/?query=Group+Sequence+Policy+Optimization&searchtype=all"
+  },
+  GFPO: {
+    title: "Sample More to Think Less: Group Filtered Policy Optimization for Concise Reasoning",
+    authors: "DeepSeek / Research Community",
+    year: "2024",
+    link: "https://arxiv.org/search/?query=Sample+More+to+Think+Less+Group+Filtered+Policy+Optimization&searchtype=all"
+  },
+  CISPO: {
+    title: "MiniMax-M1: Scaling Test-Time Compute Efficiently with Lightning Attention",
+    authors: "MiniMax AI",
+    year: "2024",
+    link: "https://arxiv.org/search/?query=MiniMax+M1+Scaling+Test-Time+Compute&searchtype=all"
+  }
+};
+
 // Mock initial data in case API fails or for first load
 export const INITIAL_EXAMPLE = {
   id: 'init-1',

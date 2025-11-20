@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
-import { INITIAL_EXAMPLE, INITIAL_GRPO_EXAMPLE, INITIAL_PPO_EXAMPLE, INITIAL_GFPO_EXAMPLE, INITIAL_CISPO_EXAMPLE, INITIAL_GSPO_EXAMPLE, DEFAULT_BETA, STEPS_ORDER, GRPO_STEPS_ORDER, PPO_STEPS_ORDER, GFPO_STEPS_ORDER, CISPO_STEPS_ORDER, GSPO_STEPS_ORDER } from './constants';
+import { INITIAL_EXAMPLE, INITIAL_GRPO_EXAMPLE, INITIAL_PPO_EXAMPLE, INITIAL_GFPO_EXAMPLE, INITIAL_CISPO_EXAMPLE, INITIAL_GSPO_EXAMPLE, DEFAULT_BETA, STEPS_ORDER, GRPO_STEPS_ORDER, PPO_STEPS_ORDER, GFPO_STEPS_ORDER, CISPO_STEPS_ORDER, GSPO_STEPS_ORDER, ALGORITHM_PAPERS } from './constants';
 import { DPOExample, GRPOExample, PPOExample, GFPOExample, CISPOExample, GSPOExample, AlgorithmType, TrainingStep, GRPOStep, PPOStep, GFPOStep, CISPOStep, GSPOStep, SimulationState, CalculationResult } from './types';
 import { generateDPOScenario, generateGRPOScenario, generatePPOScenario, generateGFPOScenario, generateCISPOScenario, generateGSPOScenario } from './services/geminiService';
 import { DpoVisualizer } from './components/Visualizer';
@@ -10,7 +10,7 @@ import { GfpoVisualizer } from './components/GfpoVisualizer';
 import { CispoVisualizer } from './components/CispoVisualizer';
 import { GspoVisualizer } from './components/GspoVisualizer';
 import { Controls } from './components/Controls';
-import { Settings, Info, Grid2X2, Split, Zap, Filter, Database, BarChart3 } from 'lucide-react';
+import { Settings, Info, Grid2X2, Split, Zap, Filter, Database, BarChart3, BookOpen, ExternalLink } from 'lucide-react';
 
 const App: React.FC = () => {
   // --- State ---
@@ -154,6 +154,9 @@ const App: React.FC = () => {
   const currentPpoStep = PPO_STEPS_ORDER[ppoStepIndex];
   const currentGfpoStep = GFPO_STEPS_ORDER[gfpoStepIndex];
   const currentCispoStep = CISPO_STEPS_ORDER[cispoStepIndex];
+  
+  // --- Current Paper ---
+  const currentPaper = ALGORITHM_PAPERS[algorithm];
 
   // --- Render ---
   return (
@@ -222,7 +225,7 @@ const App: React.FC = () => {
               </div>
            </div>
            <a 
-            href={algorithm === 'DPO' ? "https://arxiv.org/abs/2305.18290" : algorithm === 'GRPO' ? "https://arxiv.org/html/2402.03300v1" : "https://arxiv.org/abs/1707.06347"} 
+            href={currentPaper.link} 
             target="_blank" 
             rel="noreferrer" 
             className="p-2 text-slate-400 hover:text-white transition-colors"
@@ -233,7 +236,7 @@ const App: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-20 pb-32 max-w-6xl mx-auto min-h-screen flex flex-col">
+      <main className="pt-20 pb-36 max-w-6xl mx-auto min-h-screen flex flex-col">
         {algorithm === 'DPO' && (
           <DpoVisualizer 
             example={dpoExample} 
@@ -271,6 +274,30 @@ const App: React.FC = () => {
             currentStep={currentCispoStep}
           />
         )}
+
+        {/* Paper Reference Card */}
+        <div className="px-4 mt-8 opacity-80 hover:opacity-100 transition-opacity">
+           <div className="border border-slate-800 bg-slate-900/50 rounded-lg p-4 flex items-center justify-between gap-4">
+              <div className="flex items-start gap-3">
+                 <div className="p-2 bg-slate-800 rounded text-slate-400 mt-1">
+                    <BookOpen className="w-5 h-5" />
+                 </div>
+                 <div>
+                    <h4 className="text-sm font-bold text-white leading-tight mb-1">{currentPaper.title}</h4>
+                    <p className="text-xs text-slate-500 font-mono">{currentPaper.authors} • {currentPaper.year}</p>
+                 </div>
+              </div>
+              <a 
+                href={currentPaper.link} 
+                target="_blank" 
+                rel="noreferrer"
+                className="shrink-0 flex items-center gap-2 text-xs font-bold text-blue-400 hover:text-blue-300 bg-blue-900/20 px-3 py-2 rounded border border-blue-500/20 transition-all hover:bg-blue-900/40"
+              >
+                 Read Paper <ExternalLink className="w-3 h-3" />
+              </a>
+           </div>
+        </div>
+
       </main>
 
       {/* Footer Controls */}
